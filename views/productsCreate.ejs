@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  </head>
+  <body class="bg-light">
+  <div class="container-fluid p-0 bg-light">
+    <div class="container-fluid">
+      <div class="row" >
+        <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+          <div class="col-2">
+            <a class="navbar-brand" href="/"><img src="https://upload.cc/i1/2020/01/05/4JfGr9.png" alt="Jasons" width="120px" height="100px"></a>
+          </div>  
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="col-3">  
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown pr-5">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    熟食
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#" style="color:dimgray;">零嘴</a>
+                    <a class="dropdown-item" href="#" style="color:dimgray;">飲料</a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    生食
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#" style="color:dimgray;">冷凍食品</a>
+                    <a class="dropdown-item" href="#" style="color:dimgray;">調理方便包</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="col-4 offset-md-2" style="margin-left: 4%;">
+              <form action="/search" class="form-inline my-2 my-lg-0c" item-width="200px">
+                <input name="keyword" class="form-control mr-sm-2" type="search" placeholder="搜尋商品關鍵字" aria-label="Search">             
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              </form>
+            </div>
+            <div class="col-2"><h3 style="color: #ffffff"><p><%= sessionData %> </p></h3></div>
+            <div class="col-2">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown pr-3">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="https://upload.cc/i1/2019/12/30/4Ooqp3.png" alt="Member">
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <form action="/logout" method="post">
+                      <input type="submit" class="dropdown-item" style="color:dimgray;"value="登出">
+                    </form>
+                  </div>
+                </li>
+              </ul>
+            </div>  
+          </div>  
+        </nav>
+      </div>
+    </div>
+    <div class="content" style="margin-top: 200px; padding-right: 20%; padding-left: 20%;">
+        <h1><%= title %></h1>
+        <form action="/products/create" method="post"></br>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>產品編號</label>
+                    <input type="text" name="id" class="form-control" placeholder="請輸入編號">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>產品名稱</label>
+                    <input type="text" name="name" class="form-control" id="inputPassword4" placeholder="請輸入品名">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label>產品價格</label>
+                    <input type="text" name="price" class="form-control" placeholder="請輸入價格">
+                </div>
+                <div class="form-group col-md-6">
+                    <label>產品種類編號</label>
+                    <input type="text" name="typeid" class="form-control" id="inputPassword4" placeholder="請輸入種類編號">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>產品圖片網址</label>
+                <input type="text" name="photoUrl" class="form-control" placeholder="請輸入圖片網址">
+            </div>
+            <div class="form-group">
+                <label>產品描述</label>
+                <input type="textarea" name="des" style="height:100px;" class="form-control" placeholder="請輸入產品描述">
+            </div>
+            
+            <button type="submit" class="btn btn-primary mt-5">送出</button>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  </div>
+  </body>
+</html>

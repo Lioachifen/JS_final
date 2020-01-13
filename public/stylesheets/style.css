@@ -1,0 +1,152 @@
+.clear{
+  clear: both;
+}
+
+.space {
+  width: 100%;
+  height: 150px;
+}
+
+.content {
+  margin: auto;
+  width: 60%;
+  font-family: 微軟正黑體;
+}
+
+.contentPI {
+  margin: auto;
+  margin-top: 20px;
+  width: 70%;
+  font-family: 微軟正黑體;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+.order {
+  position: relative;
+  width: 90%;
+  height: 100px;
+  margin: 20px;
+  padding: 10px;
+  border: 2px #28a745 solid;
+  border-radius: 5px;
+  background-color: #343a40;
+  color: white;
+  list-style-type: none;
+  list-style-image: none;
+}
+
+.listLeft {
+  float: left;
+  width: 80%;
+  height: 100%;
+  padding-left: 5px;
+}
+
+.listRight {
+  float: left;
+  height: 100%;
+  width: 20%;
+  text-align: center;
+  line-height: 76px;
+}
+
+.listLeftAdmin {
+  float: left;
+  width: 70%;
+  height: 100%;
+  padding-left: 5px;
+}
+
+.listRightAdmin {
+  float: left;
+  height: 100%;
+  width: 30%;
+  text-align: center;
+  line-height: 76px;
+}
+
+.order > a {
+  line-height: 100%;
+}
+
+
+
+.price {
+  height: 50%;
+  line-height: 38px;
+}
+
+.date {
+  height: 50%;
+  line-height: 38px;
+}
+
+.listLeftAdmin > .price {
+  height: 33%;
+  line-height: 25px;
+}
+
+.listLeftAdmin > .date {
+  height: 33%;
+  line-height: 25px;
+}
+
+.memberID {
+  height: 33%;
+}
+
+.productImg {
+  float: left;
+  width: 50%;
+  height: 300px;
+  text-align : center;
+  line-height: 300px;
+}
+
+.productImg > img {
+  /* display: block;
+  margin: auto; */
+  max-height: 100%;
+  max-width: 100%;
+  vertical-align: middle;
+}
+
+.productInfo {
+  float: left;
+  width: 50%;
+  padding: 15px;
+  height: 300px;
+}
+
+.productInfo > h2 {
+  margin-top: 20px;
+  font-size: 38px;
+  font-weight: bold;
+}
+
+.productInfo > p {
+  font-size: 26px;
+}
+
+#inputNum {
+  margin: 40px 0px 5px 0px;
+  width: 100px;
+}
+
+.productDetail {
+  width: 100%;
+  padding: 30px 20px;
+}
+
+.productDetail > h4 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.productDetail > p {
+  text-align: justify;
+}

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title><%= title %></title>
+  <script src="jquery-3.2.1.min.js"></script>
+  <script>
+    function del() {
+      var num = parseInt($('#quantity').text()) - 1;
+      if (num < 1) {
+        $('#quantity').text(1);
+      } else {
+        $('#quantity').text(num);
+      }
+    }
+    function add() {
+      var num = parseInt($('#quantity').text()) + 1;
+      $('#quantity').text(num);
+    }
+  </script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+</head>
+
+<body>
+  <div class="container-fluid p-0 bg-light">
+    <!-- Head -->
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark"> 
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="col-2">
+              <a class="navbar-brand" href="/"><img src="https://upload.cc/i1/2020/01/05/4JfGr9.png" alt="Jasons"
+                  width="120px" height="100px"></a>
+            </div>
+            <div class="col-2">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown pr-5">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    熟食
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/snacks" style="color:dimgray;">零嘴</a>
+                    <a class="dropdown-item" href="/beverage" style="color:dimgray;">飲料</a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    生食
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/frozenfood" style="color:dimgray;">冷凍食品</a>
+                    <a class="dropdown-item" href="/ready-to-eat" style="color:dimgray;">調理方便包</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="col-6">
+              <form action="/search" class="form-inline my-2 my-lg-0c" item-width="250px">
+                <input name="keyword" class="form-control mr-sm-2" type="search" placeholder="搜尋商品關鍵字" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0 mr-4" type="submit">Search</button>
+                <h5 style="color:white;font-size:16px;margin-top:10px;">排序：</h5>
+                <select name="orderBy" style="margin-right:5px;">
+                  <option value="">請選擇</option>
+                  <option value="price">價格由低到高</option>
+                  <option value="priceDesc">價格由高到低</option>
+                </select>
+                <h5 style="color:white;font-size:16px;margin-top:10px;">篩選：</h5>
+                <select name="category" style="margin-right:40px;">                  
+                  <option value="">請選擇</option>
+                  <option value="1">【熟食】</option>
+                  <option value="1.1">零嘴</option>
+                  <option value="1.2">飲料</option>
+                  <option value="2">【生食】</option>
+                  <option value="2.1">冷凍食品</option>
+                  <option value="2.2">調理方便包</option>
+                </select> 
+              </form>
+            </div>
+            <div class="col-3" style="margin-left: -60px;">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item" style="margin-right: 20px;">
+                  <a class="nav-link" href="/cart"><img src="https://upload.cc/i1/2019/12/30/bvPujG.png" alt="Cart"></a>
+                </li>
+                <li class="nav-item dropdown pr-3">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="https://upload.cc/i1/2019/12/30/4Ooqp3.png" alt="Member">
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/orderlist?memberId=<%= sessionData %>" style="color:dimgray;">我的訂單</a>
+                    <div class="dropdown-divider"></div>
+                    <form action="/logout" method="post">
+                      <input type="submit" class="dropdown-item" style="color:dimgray;"value="登出">
+                    </form>
+                  </div>
+                </li>
+                <li class="nav-item">
+                    <h5 style="color:white;margin-top:10px;"><%- sessionData %></h5>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <!-- 購物車標題 -->
+    <div class="container-fluid bg-light" style="margin-top:125px;">
+      <div class="row justify-content-around" style="padding-top:50px;">
+        <div class="col-10 p-0 bg-dark" style="height:500px;">
+          <h2 style="padding:10px;margin:0;height:12%;background:green;color:white;">My Cart</h2>
+          <!-- 購物車商品列表 -->
+          <div class="CartDetail pre-scrollable" style="max-height:80%;overflow-y:scroll;overflow-x:hidden;">
+            <form action="/cart/checkout" method="post">
+              <% for(var i=0;cartData.length>i;i++){ %>
+                <div class="row" style="margin-top:40px;margin-bottom:40px;">
+                  <div class="col-2">
+                    <div class="form-check custom-checkbox" style="margin-left:20px;margin-right:40px;float:left;">
+                      <label class="custom-control" style="display:inline;">
+                        <img src=<%= cartData[i].picurl %> width="120px" height="100px">
+                      </label>
+                    </div>
+                  </div>
+                  <div class="col-5">
+                    <div class="info" style="color:white;margin-top:20px;margin-left:40px;">
+                      <h4><%- cartData[i].name %></h4>
+                      <h4 style="font-size:18px;">$<%= cartData[i].price %></h4>
+                    </div>
+                  </div>
+                  <div class="col-5">
+                    <div class="num" style="margin-top:40px;">
+                        <input type="number" value="<%- cartData[i].quantity %>" style="width: 50px;">
+                        <input type="hidden" name="id" value=<%- data[i] %>>
+                        <a href="/cart/delete?cartID=<%= cartData[i].name %>" class="btn btn-danger" style="margin-top:-5px;margin-left:200px;">刪除
+                        </a>        
+                        <input type="hidden" name="product_name" value=<%- cartData[i].name %>>
+                        <input type="hidden" name="product_price" value=<%- cartData[i].price %>>
+                        <input type="hidden" name="product_quantity" value=<%- cartData[i].quantity %>>                    
+                      </div>
+                  </div>
+                  <div class="clear" style="clear:both;"></div>
+                </div>  
+              <% } %>
+              <input type="hidden" name="count" value=<%- lengthData %>>
+              <input type="hidden" name="buyer" value=<%- sessionData %>>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-around">
+        <div class="col-10 p-0 bg-dark" style="height:80px;margin-bottom:50px;">
+
+          <a name="checkout" style="color:white;width:100px;float:right;margin-right:148px;margin-top:20px;" class="btn btn-primary" data-toggle="modal" data-target="#checkout" data-whatever="@mdo">確認結帳</a>
+          <!-- Checkout Dialog-->
+<div class="modal fade" id="checkout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="top: 150px;">
+  <div class="modal-dialog" role="document">
+      <div class="modal-content">
+      <div class="modal-header" style="border: none;">
+          <h5 class="modal-title" id="exampleModalLabel" style="font-weight: bold;">確認結帳</h5>
+      </div>
+        <div class="modal-body">
+            <p>請問確認要結帳嗎？</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-light" data-dismiss="modal" style="width: 150px;">取消</button>
+              <input type="submit" class="btn btn-primary" value="確定" style="background:#FF7744; border: none; width: 150px;"></input>
+            </div>
+          </form>
+      </div>
+  </div>
+</div>
+        </div>
+      </div>
+    </div>
+  
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+      integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+      integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+      crossorigin="anonymous"></script>
+  </div>
+</body>
+
+</html>

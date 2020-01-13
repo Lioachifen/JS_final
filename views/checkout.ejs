@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">    
+  </head>
+  <body>
+  <div class="container-fluid p-0 bg-light"> 
+    <!-- Head -->  
+    <div class="container-fluid">
+      <div class="row" >
+        <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="col-2">     
+              <a class="navbar-brand" href="/"><img src="https://upload.cc/i1/2020/01/05/4JfGr9.png" alt="Jasons" width="120px" height="100px"></a>
+            </div>  
+            <div class="col-3">  
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown pr-5">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    熟食
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#" style="color:dimgray;">零嘴</a>
+                    <a class="dropdown-item" href="#" style="color:dimgray;">飲料</a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    生食
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#" style="color:dimgray;">冷凍食品</a>
+                    <a class="dropdown-item" href="#" style="color:dimgray;">調理方便包</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="col-4">
+              <form class="form-inline my-2 my-lg-0c" item-width="200px">
+                <input class="form-control mr-sm-2" type="search" placeholder="搜尋商品關鍵字" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+              </form>
+            </div>
+            <div class="col-3"> 
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="/cart"><img src="https://upload.cc/i1/2019/12/30/bvPujG.png" alt="Cart"></a>
+                </li>
+                <li class="nav-item dropdown pr-3" style="margin-left: 50px;">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="https://upload.cc/i1/2019/12/30/4Ooqp3.png" alt="Member">
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/orderlist" style="color:dimgray;">我的訂單</a>
+                    <div class="dropdown-divider"></div>
+                    <form action="/logout" method="post">
+                      <input type="submit" class="dropdown-item" style="color:dimgray;"value="登出">
+                    </form>
+                  </div>
+                </li>
+                <li class="nav-item">
+                    <h5 style="color:white;margin-top:10px;"><%- sessionData %></h5>
+                </li>
+              </ul>
+            </div>  
+          </div>  
+        </nav>
+      </div>
+    </div>
+    <!-- 購物車標題 -->
+    <div class="container-fluid bg-light" style="margin-top:125px;">
+        <div class="row justify-content-around" style="padding-top:50px;padding-bottom:50px;">
+            <div class="col-md-6 offset-md-1 p-0 bg-dark" style="height:500px;">
+                <h2 style="padding:10px;margin:0;height:12%;background:green;color:white;">Checkout</h2>
+                <!-- 購物車商品列表 -->
+                <div class="CartDetail pre-scrollable" style="max-height:88%;overflow-y:scroll;">
+                    <img src="https://upload.cc/i1/2019/12/30/ZjRBXJ.png" width="120px" height="100px" style="float:left;margin-left:20px;">
+                    <div class="info" style="color:white;margin-top:33px;">
+                        <h4 style="float:left;margin-left:20px;">東北酸菜白肉調理包</h4>
+                        <h4 style="float:left;margin-left:40px;">$10000</h4>
+                        <h4 style="float:left;margin-left:40px;">商品數量：<h4>1</h4></h4>
+                    </div>
+                    <div class="clear" style="clear:both;"></div>
+                </div>
+            </div>
+            <div class="col-md-3 offset-md-1 p-0 bg-dark" style="height:330px;text-align:center;">
+                <h2 style="padding:10px;background:green;border:gold;color:white;text-align:left;">Total</h2>
+                <h4 style="margin-top:30px;font-size:20px;color:white;">金額總計：$10000</h4>
+                <form style="width:135px;margin-top:40px;margin-left:auto;margin-right:auto;">
+                    <select class="form-control" id="exampleFormControlSelect1">
+                        <option>選擇運送方式</option>
+                        <option>7-11貨到付款</option>
+                        <option>全家貨到付款</option>
+                        <option>黑喵宅急便</option>
+                    </select>
+                    <a href="/orderlist">
+                      <button type="button" class="btn btn-outline-primary" style="width:100px;margin-top:50px;">下訂單囉</button>
+                    </a>
+                </form>
+            </div>
+            <div class="col-md-0 offset-md-1"></div>
+        </div>    
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  </div>
+  </body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="../stylesheets/style.css">
+  </head>
+  <body class="bg-light">
+  <div class="container-fluid p-0"> 
+    <!-- Head -->
+    <div class="container-fluid">
+      <div class="row">
+        <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark"> 
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="col-2">
+              <a class="navbar-brand" href="/"><img src="https://upload.cc/i1/2020/01/05/4JfGr9.png" alt="Jasons"
+                  width="120px" height="100px"></a>
+            </div>
+            <div class="col-2">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown pr-5">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    熟食
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/snacks" style="color:dimgray;">零嘴</a>
+                    <a class="dropdown-item" href="/beverage" style="color:dimgray;">飲料</a>
+                  </div>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    生食
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/frozenfood" style="color:dimgray;">冷凍食品</a>
+                    <a class="dropdown-item" href="/ready-to-eat" style="color:dimgray;">調理方便包</a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+           <div class="col-6">
+              <form action="/search" class="form-inline my-2 my-lg-0c" item-width="250px">
+                <input name="keyword" class="form-control mr-sm-2" type="search" placeholder="搜尋商品關鍵字" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0 mr-4" type="submit">Search</button>
+                <h5 style="color:white;font-size:16px;margin-top:10px;">排序：</h5>
+                <select name="orderBy" style="margin-right:5px;">
+                  <option value="">請選擇</option>
+                  <option value="price">價格由低到高</option>
+                  <option value="priceDesc">價格由高到低</option>
+                </select>
+                <h5 style="color:white;font-size:16px;margin-top:10px;">篩選：</h5>
+                <select name="category" style="margin-right:40px;">                  
+                  <option value="">請選擇</option>
+                  <option value="1">【熟食】</option>
+                  <option value="1.1">零嘴</option>
+                  <option value="1.2">飲料</option>
+                  <option value="2">【生食】</option>
+                  <option value="2.1">冷凍食品</option>
+                  <option value="2.2">調理方便包</option>
+                </select> 
+              </form>
+            </div>
+            <div class="col-3" style="margin-left: -60px;">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item" style="margin-right: 20px;">
+                  <a class="nav-link" href="/cart"><img src="https://upload.cc/i1/2019/12/30/bvPujG.png" alt="Cart"></a>
+                </li>
+                <li class="nav-item dropdown pr-3">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="https://upload.cc/i1/2019/12/30/4Ooqp3.png" alt="Member">
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="/orderlist?memberId=<%= sessionData %>" style="color:dimgray;">我的訂單</a>
+                    <div class="dropdown-divider"></div>
+                    <form action="/logout" method="post">
+                      <input type="submit" class="dropdown-item" style="color:dimgray;"value="登出">
+                    </form>
+                  </div>
+                </li>
+                <li class="nav-item">
+                    <h5 style="color:white;margin-top:10px;"><%- sessionData %></h5>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="space">
+    </div>
+    <div class="content">
+      <h2>我的訂單</h2>
+      <ul>
+        <% for(let i=0 ; i<data.length ; i++) { %>
+          <li class="order">
+            <div class="listLeftAdmin" style="width: 50%; margin-right: 10%;">
+              <div class="date"><%= timeData[i] %></div>
+              <div class="memberID"> </div>
+              <div class="price">Total: NT. <%= data[i].totalPrice %></div>
+            </div>
+            <div class="listRightAdmin"  style="width: 40%;">
+              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal<%= i %>" data-whatever="@mdo" style="margin-left: 60%;">Detail</button>
+            </div>
+          </li>
+          <!-- Dialog 視窗 -->
+          <div class="modal fade" id="exampleModal<%= i %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="top: 100px;">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content" style="overflow-y:scroll;height:600px;">
+                <div class="modal-header" style="border: none;">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-weight: bold;">訂單詳細資訊</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                  <div class="modal-body">
+                    <form method="post" action="/login">
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">MemberID</label>
+                        <input readonly type="text" class="form-control" id="account" name="account" value=<%= data[i].memberID %> style="display:inline;">
+                      </div>
+                      <div class="container-fluid">
+                        <!-- 表頭 -->
+                        <div class="row border-bottom"  style="margin-bottom: 10px;">
+                          <div class="col-md-3">
+                            <label for="recipient-name" class="col-form-label">品項</label>
+                          </div>
+                          <div class="col-md-3">
+                            <label for="recipient-name" class="col-form-label">數量</label>
+                          </div>
+                          <div class="col-md-3">
+                            <label for="recipient-name" class="col-form-label">單價</label>
+                          </div>
+                          <div class="col-md-3">
+                            <label for="recipient-name" class="col-form-label">小計</label>
+                          </div>
+                        </div>
+                        <!-- 呈現每一項商品 -->
+                        <% for(let j=0 ; j<data[i].name.length ; j++) { %>
+                          <div class="row">
+                            <div class="col-md-3">
+                              <label for="recipient-name" class="col-form-label"><%= data[i].name[j] %></label>
+                            </div>
+                            <div class="col-md-3">
+                              <input readonly type="text" class="form-control" id="account" name="account" value=<%= data[i].quantity[j] %> style="display:inline;">
+                            </div>
+                            <div class="col-md-3">
+                              <label for="recipient-name" class="col-form-label">$<%= data[i].price[j] %></label>
+                            </div>
+                            <div class="col-md-3">
+                              <label for="recipient-name" class="col-form-label">$<%= data[i].price[j]*data[i].quantity[j] %></label>
+                            </div>
+                          </div>
+                        <% } %>
+                        <div class="row">
+                          <div class="col-md-4">
+                            <label for="recipient-name" class="col-form-label"></label>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <label for="recipient-name" class="col-form-label"></label>
+                          </div>
+                          <div class="col-md-3">
+                            <label for="recipient-name" class="col-form-label">總價</label>
+                          </div>
+                          <div class="col-md-3">
+                            <label for="recipient-name" class="col-form-label">$<%= totalPriceData[i] %></label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">訂單成立時間</label>
+                        <input readonly type="text" class="form-control" id="account" name="account" value=<%= timeData[i] %>">
+                      </div>
+                  </div>
+                      <div class="modal-footer" style="text-align: center; display:inline;">
+                        <button type="button" class="btn btn-success" data-dismiss="modal" style="width: 150px;">確認</button>
+                      </div>
+                    </form>
+                </div>
+            </div>
+          </div>
+        <% } %>
+      </ul>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  </div>
+  </body>
+</html>
